@@ -1,0 +1,26 @@
+{
+  "name": "short_url",
+  "version": "1.0.0",
+  "description": "URL-SHORTNER",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kamal-lochanDash/URL_SHORTNER.git"
+  },
+  "author": "KAMAL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kamal-lochanDash/URL_SHORTNER/issues"
+  },
+  "homepage": "https://github.com/Kamal-lochanDash/URL_SHORTNER#readme",
+  "dependencies": {
+    "express": "^4.21.0",
+    "mongoose": "^8.6.3",
+    "nodemon": "^3.1.5",
+    "shortid": "^2.2.16"
+  }
+}
