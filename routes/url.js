@@ -1,11 +1,14 @@
 const express= require("express");
-const { handelGenerateNewShortURL } = require("../controllers/url");
+const URL=require("../models/url")
+const { handelGenerateNewShortURL,handelRedirectURL, handelGetAnalytics } = require("../controllers/url");
 
 const router= express.Router()
 
 
 router.post("/",handelGenerateNewShortURL)
 
+router.get("/:shortId",handelRedirectURL)
+router.get("/analytics/:shortId",handelGetAnalytics)
 
 
 

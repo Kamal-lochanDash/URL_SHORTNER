@@ -23,9 +23,28 @@ async function  handelGenerateNewShortURL(req,res) {
 
 }
 
+async function handelRedirectURL(req,res) {
+    const shortID=req.params.shortId;
+    const entry=  await URL.findOneAndUpdate({shortID},{$push:{visitHistory:{timestamp:Date.now()}}})
 
+res.redirect(entry.redirectURL)
+};
+
+
+async function handelGetAnalytics(req,res) {
+    const shortID=req.params.shortId;
+   const entry= await URL.findOne({shortID});
+
+   return res.json({
+    totalClicks:entry.visitHistory.length,
+    analytics:entry.visitHistory
+})
+}
 
 
 module.exports={
     handelGenerateNewShortURL,
+    handelRedirectURL,
+    handelGetAnalytics
+    
 }
