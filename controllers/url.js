@@ -19,7 +19,11 @@ async function  handelGenerateNewShortURL(req,res) {
         
     });
 
-    return res.json({id: shortID})
+   return res.render("realHome",{
+    id:shortID,
+   })
+   
+   // return res.json({id: shortID})
 
 }
 
@@ -41,10 +45,21 @@ async function handelGetAnalytics(req,res) {
 })
 }
 
+async function  hadeltestcase(req,res) {
+
+    const allURLS= await URL.find({});
+
+    return res.render('home',{
+        urls: allURLS,
+    })
+
+  //  res.json({working:"rand"});
+}
 
 module.exports={
     handelGenerateNewShortURL,
     handelRedirectURL,
-    handelGetAnalytics
+    handelGetAnalytics,
+    hadeltestcase
     
 }
