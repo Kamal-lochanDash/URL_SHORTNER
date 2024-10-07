@@ -8,8 +8,19 @@ async function handelHomepage(req,res) {
     })
 }
 
+async function handelLandingpage(req,res) {
+    return res.render("landing");
+}
+
+
+async function hadelsignupPage(req,res) {
+   return res.render("signup");
+}
+
 
 
 module.exports={
     handelHomepage,
+    hadelsignupPage,
+    handelLandingpage
 }

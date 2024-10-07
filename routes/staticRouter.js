@@ -1,7 +1,9 @@
 const express= require("express");
-const { handelHomepage } = require("../controllers/static");
+const { handelHomepage, hadelsignupPage, handelLandingpage } = require("../controllers/static");
 const router= express.Router()
 
 
-router.get("/",handelHomepage)
+router.get("/",handelLandingpage)
+router.get("/home",handelHomepage)
+router.get("/signup",hadelsignupPage)
 module.exports=router;
