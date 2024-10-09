@@ -7,7 +7,7 @@ const userRouter=require("./routes/user")
 const app= express();
 const port=8001;
 const cookieParser= require("cookie-parser");
-const{restrictToLoggedinUserOnly}=require("./middlewares/auth")
+const{restrictToLoggedinUserOnly,checkAuth}=require("./middlewares/auth")
 
 connectToMongoDB("mongodb://127.0.0.1:27017/short-url")
 
@@ -17,9 +17,9 @@ app.set("views",path.resolve("./views"));
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
-app.use("/",staticRouter)
+app.use("/",checkAuth,staticRouter) // here we use checkAuth because we need user req property in the static request
 app.use("/url",restrictToLoggedinUserOnly,urlRoute)
-app.use("/user",userRouter)
+app.use("/user" ,userRouter)
 
 
 

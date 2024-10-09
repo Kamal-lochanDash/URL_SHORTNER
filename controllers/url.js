@@ -9,14 +9,16 @@ const shortid = require("shortid");
 async function  handelGenerateNewShortURL(req,res) {
     const body=req.body;
     if(!body.url){
-        return res.status(400).json({Error: "url is required"})
+        return res.render("realHome",{
+            NoUrl:"please any Valid Url"
+        })
     } 
     const shortID=shortid(8);
     await URL.create({
         shortID: shortID,
         redirectURL: body.url,
-        visitHistory:[]
-        
+        visitHistory:[],
+        createdBy:req.user.id,
     });
 
    return res.render("realHome",{

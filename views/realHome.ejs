@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,67 +11,80 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
+
+        
+
         body {
-            background-color: #f0f4f7;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+            overflow: hidden;
         }
 
         h1 {
-            color: #333;
-            font-size: 3rem;
+            color: #fff;
+            font-size: 4rem;
+            font-weight: bold;
             text-align: center;
             margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
         }
 
         form {
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
             width: 100%;
-            max-width: 500px;
-            margin-bottom: 40px;
+            max-width: 600px;
             text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
         label {
-            font-size: 1.2rem;
-            color: #555;
+            font-size: 1.5rem;
+            color: #333;
             margin-bottom: 10px;
             display: block;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             margin: 15px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         button {
-            padding: 12px 20px;
-            background-color: #28a745;
+            padding: 15px 25px;
+           background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: background 0.3s ease;
             width: 100%;
         }
 
         button:hover {
-            background-color: #218838;
+            background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
+            transform: scale(1.05);
+            transition: all ease 800ms;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
         }
 
         table {
@@ -78,7 +92,7 @@
             max-width: 1000px;
             margin: 20px auto;
             border-collapse: collapse;
-            background-color: #fff;
+            background-color: #f5f5f5;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
@@ -90,6 +104,7 @@
             text-align: center;
             font-size: 1rem;
             text-transform: uppercase;
+           
         }
 
         tbody td {
@@ -97,10 +112,13 @@
             border-bottom: 1px solid #ccc;
             font-size: 1rem;
             color: #333;
+            
         }
 
         tbody tr:hover {
-            background-color: #f1f1f1;
+            background-color: #ffffff;
+            transform: scale(1.02);
+            transition: all 0.2s ease-in-out;
         }
 
         td {
@@ -115,54 +133,106 @@
 
         td a:hover {
             text-decoration: underline;
+            color: #0056b3;
         }
 
         p {
-            font-size: 1.2rem;
-            color: #333;
+            font-size: 1.3rem;
+            color: #fff;
             margin-top: 20px;
             text-align: center;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        
-        /* Responsiveness */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
+
+        /* Floating bubbles */
+        .bubble {
+            position: absolute;
+            bottom: -150px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: bubble 10s infinite;
+        }
+
+        .bubble:nth-child(1) {
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            animation-duration: 12s;
+        }
+
+        .bubble:nth-child(2) {
+            left: 25%;
+            width: 50px;
+            height: 50px;
+            animation-duration: 10s;
+        }
+
+        .bubble:nth-child(3) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-duration: 14s;
+        }
+
+        .bubble:nth-child(4) {
+            left: 55%;
+            width: 30px;
+            height: 30px;
+            animation-duration: 11s;
+        }
+
+        .bubble:nth-child(5) {
+            left: 70%;
+            width: 70px;
+            height: 70px;
+            animation-duration: 15s;
+        }
+
+        .bubble:nth-child(6) {
+            left: 85%;
+            width: 100px;
+            height: 100px;
+            animation-duration: 18s;
+        }
+
+        @keyframes bubble {
+            0% {
+                transform: translateY(0);
             }
 
-            h1 {
-                font-size: 2rem;
-            }
-
-            form {
-                padding: 15px;
-            }
-
-            table {
-                width: 100%;
-                font-size: 0.9rem;
-            }
-
-            thead th, tbody td {
-                padding: 8px;
+            100% {
+                transform: translateY(-1200px) rotate(360deg);
             }
         }
     </style>
 </head>
+
 <body>
-    <h1>URL-SHORTNER</h1>
+    <h1>URL-Shortener</h1>
+
+    <% if (locals.NoUrl) { %>
+    <form method="post" action="/url/">
+        <label>Enter your original URL</label>
+        <p style="color: red;"><%= NoUrl %></p>
+        <input type="text" name="url" placeholder="https://example.com">
+        <button type="submit">Generate</button>
+    </form>
+    <% } else { %>
     <form method="post" action="/url/">
         <label>Enter your original URL</label>
         <input type="text" name="url" placeholder="https://example.com">
         <button type="submit">Generate</button>
     </form>
+    <% } %>
 
     <% if (locals.id) { %>
-     <p>URL GENERATED: <a href="http://localhost:8001/url/<%= id %>" target="_blank">http://localhost:8001/url/<%= id %></a></p>
+    <p>URL GENERATED: <a href="http://localhost:8001/url/<%= id %>" target="_blank">http://localhost:8001/url/<%= id %></a></p>
     <% } %>
 
     <% if (locals.urls) { %>
-     <table>
+    <table>
         <thead>
             <tr>
                 <th>S.NO</th>
@@ -174,16 +244,25 @@
         </thead>
         <tbody>
             <% urls.forEach((url, index) => { %>
-                <tr>
-                    <td><%= index+1 %></td>
-                    <td><%= url.shortID %></td>
-                    <td><%= url.redirectURL %></td>
-                    <td><%= url.visitHistory.length %></td>
-                    <td><a href="http://localhost:8001/url/<%= url.shortID %>" target="_blank">http://localhost:8001/url/<%= url.shortID %></a></td>
-                </tr>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= url.shortID %></td>
+                <td><%= url.redirectURL %></td>
+                <td><%= url.visitHistory.length %></td>
+                <td><a href="http://localhost:8001/url/<%= url.shortID %>" target="_blank">http://localhost:8001/url/<%= url.shortID %></a></td>
+            </tr>
             <% }) %>
         </tbody>
-     </table>
+    </table>
     <% } %>
+
+    <!-- Adding the bubbles to the body -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 </body>
+
 </html>

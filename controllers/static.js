@@ -2,7 +2,9 @@ const URL=require("../models/url")
 
 
 async function handelHomepage(req,res) {
-    const allURLS= await URL.find({});
+    
+    if(!req.user) return res.redirect("/user/login")
+    const allURLS= await URL.find({createdBy:req.user.id});
     return res.render("realHome",{
         urls:allURLS
     })
