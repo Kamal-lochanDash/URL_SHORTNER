@@ -11,7 +11,12 @@ async function handelHomepage(req,res) {
 }
 
 async function handelLandingpage(req,res) {
-    return res.render("landing");
+    if(req.user){
+        return res.redirect("/home")
+    }else{
+        return res.render("landing");
+    }
+    
 }
 
 

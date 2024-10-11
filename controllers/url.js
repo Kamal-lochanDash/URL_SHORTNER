@@ -10,7 +10,7 @@ async function  handelGenerateNewShortURL(req,res) {
     const body=req.body;
     if(!body.url){
         return res.render("realHome",{
-            NoUrl:"please any Valid Url"
+            NoUrl:"please enter any Valid Url"
         })
     } 
     const shortID=shortid(8);
