@@ -29,9 +29,14 @@ async function hadelsignupPage(req,res) {
 }
 
 
+async function handelLogout(req,res) {
+    res.cookie("uid"," ",{maxAge:1})
+    return res.redirect("/");
+}
 
 module.exports={
     handelHomepage,
     hadelsignupPage,
-    handelLandingpage
+    handelLandingpage,
+    handelLogout
 }
