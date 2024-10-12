@@ -21,6 +21,10 @@ function getUser(token){
    
 }
 
+function destroyUser(token){
+
+}
+
 
 
 module.exports={
