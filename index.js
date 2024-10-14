@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
 app.use("/",checkAuth,staticRouter) // here we use checkAuth because we need user req property in the static request
-app.use("/url",restrictToLoggedinUserOnly,restrictedTo(["NORMAL"]),urlRoute)
+app.use("/url",restrictToLoggedinUserOnly,restrictedTo(["NORMAL","ADMIN"]),urlRoute)
 app.use("/user" ,userRouter)
 
 

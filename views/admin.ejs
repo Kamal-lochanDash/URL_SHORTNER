@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .admin-login-container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      width: 400px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 15px;
+      margin: 20px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    input[type="password"]:hover {
+      border-color: #007bff;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+    }
+
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    /* Elegant hover animation on container */
+    .admin-login-container:hover {
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .info-text {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-login-container">
+    <h2>Admin Access</h2>
+    <% if (locals.error) { %>
+       
+        <form action="/user/admin/validate-passkey" method="post">
+            <p style="color: red;"><%= error %></p>
+            <input type="password" name="passkey" placeholder="Enter Passkey" required>
+            <input type="submit" value="Login">
+          </form>
+    <% } else { %>
+    <form action="/user/admin/validate-passkey" method="post">
+      <input type="password" name="passkey" placeholder="Enter Passkey" required>
+      <input type="submit" value="Login">
+    </form>
+
+    <% } %>
+    <div class="info-text">
+      Enter the passkey to access the admin dashboard.
+    </div>
+  </div>
+
+</body>
+</html>
