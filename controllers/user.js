@@ -54,19 +54,27 @@ async function handelAdmin(req,res,) {
 }
 
 
-function handelValidatePasskey(req,res){
-    let vrified=false;
+async function handelValidatePasskey(req,res){
+    
     const passKey="Kamaldash2004#"
     const body=req.body;
+    console.log(req.user,"Rand")
+    const id=req.user?.id;
+    console.log(id)
     
     if(body.passkey==passKey){
-       // logic to send a cookie for admin
-        vrified=true
-        const token= setAdmin(vrified)
+       // logic to send a cookie for user wo want to be admin
+        const user= await User.findOne({_id:id})
+        console.log(user);
+       await User.findByIdAndUpdate(id,{role:"ADMIN"});
+        const userA= await User.findOne({_id:id})
+        console.log(userA);
+        res.cookie("uid"," ",{maxAge:1})
+        return res.render("login",{
+            message:"Plese login here to proceed further"
+        });
 
-        res.cookie("admin",token);
-        
-        return res.render("test");
+       //what if a admin logins
     }else{
         return res.render("admin",{
             error:"The key is not valid"

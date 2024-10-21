@@ -30,9 +30,11 @@ async function checkAuth(req,res,next) {
 function restrictedTo(roles=[]){
     return function (req,res,next){
         if(!req.user){
-            return res.redirect("/signup")
+            return res.render("signup",{
+                error:"You must be a user first"
+            })
         } 
-      console.log(req.user)
+    
         if(!roles.includes(req.user.role)){
             return res.end("you are un authorised");
         }

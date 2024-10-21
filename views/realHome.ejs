@@ -253,7 +253,10 @@
             <% if (locals.name) { %>
              <li><p class="profile">Hi <%= name %></p></li>
             <% } %>
-
+            <% if (isAdmin==true) { %>
+                <li><a class="dropdown-item" href="/user/admin/login">DASHBOARD</a></li>
+            <% } %>
+            
             <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item secondary" href="/logout">Logout</a></li>
         </ul>
