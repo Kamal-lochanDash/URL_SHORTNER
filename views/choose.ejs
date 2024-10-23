@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Request with Modal Buttons</title>
+  <style>
+    /* Full screen layout with dark background */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #1e1e1e; /* Dark background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Bubble effect container */
+    .bubble {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      animation: rise infinite ease-in;
+    }
+
+    /* Animating bubbles upwards */
+    @keyframes rise {
+      0% {
+        bottom: -50px;
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(0);
+      }
+      100% {
+        bottom: 100%;
+        transform: translateX(0);
+      }
+    }
+
+    /* Modal container */
+    .modal {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      width: 400px;
+      text-align: center;
+      position: relative;
+      z-index: 10; /* Modal stays above the bubble effect */
+    }
+
+    /* Modal header */
+    .modal h2 {
+      font-size: 24px;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    /* Modal buttons */
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    /* Button styles */
+    .action-btn {
+      padding: 10px 30px;
+      font-size: 16px;
+      border: 2px solid transparent;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-profile {
+      background-color: #c0392b;
+      color: white;
+    }
+
+    .btn-profile:hover {
+      background-color: white;
+      color: #c0392b;
+      border-color: #c0392b;
+    }
+
+    .btn-dashboard {
+      background-color: white;
+      color: #2ecc71;
+      border: 2px solid #2ecc71;
+    }
+
+    .btn-dashboard:hover {
+      background-color: #2ecc71;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Modal Popup -->
+  <div class="modal" id="popupModal">
+    <h2>Are you ready to proceed?</h2>
+    <div class="modal-buttons">
+      <button id="visitProfile" class="action-btn btn-profile">Visit Profile</button>
+      <button id="viewDashboard" class="action-btn btn-dashboard">View Dashboard</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const apiUrl = "http://localhost:8001/user/choose";
+
+      // Automatically make the GET request
+      fetch(apiUrl)
+        .then(response => {
+          if (response.redirected) {
+            // If the server sends a redirect, follow it
+            window.location.href = response.url;
+          } else {
+            // Show modal with buttons if no redirect happens
+            document.getElementById('popupModal').style.display = 'block';
+          }
+        })
+        .catch(error => console.error("Error making request:", error));
+
+      // Button click event handlers
+      document.getElementById('visitProfile').addEventListener('click', () => {
+        window.location.href = "/home"; // Redirect to profile page
+      });
+
+      document.getElementById('viewDashboard').addEventListener('click', () => {
+        window.location.href = "/user/admin/login"; // Redirect to dashboard page
+      });
+
+      // Function to create random bubbles
+      function createBubble() {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+
+        // Random size
+        const size = Math.random() * 30 + 10; // Size between 10px and 40px
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+
+        // Randomize animation duration and delay
+        const duration = Math.random() * 5 + 5; // Duration between 5s and 10s
+        const delay = Math.random() * 2; // Delay between 0s and 2s
+        bubble.style.animationDuration = `${duration}s`;
+        bubble.style.animationDelay = `-${delay}s`;
+
+        // Set random horizontal position
+        bubble.style.left = `${Math.random() * 100}vw`;
+
+        document.body.appendChild(bubble);
+
+        // Remove the bubble after animation ends
+        bubble.addEventListener('animationend', () => {
+          bubble.remove();
+        });
+      }
+
+      // Create multiple bubbles
+      setInterval(createBubble, 500); // Create a new bubble every 500ms
+    });
+  </script>
+</body>
+</html>

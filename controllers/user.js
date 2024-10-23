@@ -18,6 +18,7 @@ async function handelUserSignup(req,res) {
 };
 
 async function handelUserLogin(req,res) {
+   // console.log(req?.user)
     const {email,password}= req.body;
 
    const user= await User.findOne({email,password});
@@ -34,7 +35,8 @@ async function handelUserLogin(req,res) {
    res.cookie("uid",token);
   
 
-   return res.redirect("/home")
+   //return res.redirect("/home")
+   return res.render("choose");
 };
 
 
@@ -58,32 +60,55 @@ async function handelValidatePasskey(req,res){
     
     const passKey="Kamaldash2004#"
     const body=req.body;
-    console.log(req.user,"Rand")
+    //console.log(req.user?.role,"Rand")
     const id=req.user?.id;
-    console.log(id)
-    
-    if(body.passkey==passKey){
-       // logic to send a cookie for user wo want to be admin
-        const user= await User.findOne({_id:id})
-        console.log(user);
-       await User.findByIdAndUpdate(id,{role:"ADMIN"});
-        const userA= await User.findOne({_id:id})
-        console.log(userA);
-        res.cookie("uid"," ",{maxAge:1})
-        return res.render("login",{
-            message:"Plese login here to proceed further"
-        });
+    //console.log(id)
+    if(req?.user?.role=="NORMAL"){
 
-       //what if a admin logins
-    }else{
-        return res.render("admin",{
-            error:"The key is not valid"
-        })
+
+        if(body.passkey==passKey){
+            // logic to send a cookie for user wo want to be admin
+             const user= await User.findOne({_id:id})
+            // console.log(user);
+            await User.findByIdAndUpdate(id,{role:"ADMIN"});
+             const userA= await User.findOne({_id:id})
+             console.log(userA);
+             res.cookie("uid"," ",{maxAge:1})
+             return res.render("login",{
+                 message:"Plese login here to proceed further"
+             });
+         }else{
+             return res.render("admin",{
+                 error:"The key is not valid"
+             })
+         }
+    }else if(req?.user?.role=="ADMIN"){
+        //what if a admin logins
+        if(body.passkey==passKey){
+            return res.redirect("/user/admin")
+        }else{
+            return res.render("admin",{
+                error:"The key is not valid"
+            })
+        }
     }
    
    
+   
 
     
+}
+
+
+
+async function handelChooseAdminOption(req,res) {
+    console.log(req?.user?.role,"Nigga")
+    if(req?.user?.role=="NORMAL"){
+        return res.redirect("/home")
+    }else{
+        return res.json({stay:true});
+    }
+   
 }
 
 module.exports={
@@ -92,5 +117,6 @@ module.exports={
     handelGetLogin,
     handelAdmin,
     handelGetAdminLogin,
-    handelValidatePasskey
+    handelValidatePasskey,
+    handelChooseAdminOption
 }
