@@ -51,8 +51,10 @@ async function handelGetLogin(req,res) {
 
 
 async function handelAdmin(req,res,) {
-    const allURLS= await URL.find({});
-    return res.json(allURLS);
+   const allUser= await User.find({});
+   return res.render("dashboard",{
+    allUser:allUser
+   });
 }
 
 
@@ -111,6 +113,24 @@ async function handelChooseAdminOption(req,res) {
    
 }
 
+
+async function handelAdminViewId(req,res) {
+   
+    const ID=req?.params?.ID;
+    console.log(ID);
+
+    const allURLS= await URL.find({createdBy:ID});
+    console.log(allURLS)
+
+    const user= await User.find({_id:ID})
+    const name=user[0].name;
+console.log(name)
+    return res.render("viewurls",{
+        allURLS:allURLS,
+        name:name
+    })
+}
+
 module.exports={
     handelUserSignup,
     handelUserLogin,
@@ -118,5 +138,6 @@ module.exports={
     handelAdmin,
     handelGetAdminLogin,
     handelValidatePasskey,
-    handelChooseAdminOption
+    handelChooseAdminOption,
+    handelAdminViewId
 }
