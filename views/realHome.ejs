@@ -232,6 +232,28 @@
 
 
 
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+#deleteModal .btn-danger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 75, 43, 0.8);
+}
+#deleteModal .btn-secondary:hover {
+    background-color: #bbb;
+    color: #333;
+}
+
        
     </style>
 </head>
@@ -256,9 +278,12 @@
             <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
                 <li><a class="dropdown-item" href="/user/admin/login">DASHBOARD</a></li>
             <% } %>
+           
             
             <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item secondary" href="/logout">Logout</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item secondary" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Account</a></li>
         </ul>
       </div>
 
@@ -267,7 +292,35 @@
 
 
 
-
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
+                <!-- Modal Header -->
+                <div class="modal-header" style="background: linear-gradient(135deg, #ff416c, #ff4b2b, #ff2c84); color: #fff;">
+                    <h5 class="modal-title" id="deleteModalLabel" style="font-weight: bold;">Confirm Deletion</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body text-center" style="padding: 40px; background-color: #f9f9f9;">
+                    <div style="font-size: 3rem; color: #ff4b2b; animation: pulse 1.5s infinite;">
+                        ⚠️
+                    </div>
+                    <p style="font-size: 1.2rem; color: #444; margin-top: 20px; font-weight: 500;">
+                        This action will <strong>permanently delete</strong> your account. Are you sure you want to proceed?
+                    </p>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer" style="border-top: none; padding: 25px 30px; background-color: #f9f9f9;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #ddd; border-radius: 10px; padding: 12px 25px; font-weight: bold; color: #666; border: none; transition: all 0.3s ease;">
+                        Cancel
+                    </button>
+                    <a href="/delete-account" class="btn btn-danger" style="background: linear-gradient(135deg, #ff4b2b, #ff2c84); border: none; border-radius: 10px; padding: 12px 25px; font-weight: bold; color: #fff; box-shadow: 0 6px 20px rgba(255, 75, 43, 0.6); transition: transform 0.3s ease;">
+                        Yes, Delete My Account
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
