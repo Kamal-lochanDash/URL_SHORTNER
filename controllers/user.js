@@ -131,6 +131,17 @@ console.log(name)
     })
 }
 
+
+async function  handelUserDeleteAccount(req,res) {
+    const id=req?.user?.id;
+  await User.findByIdAndDelete(id);
+  await URL.deleteMany({createdBy:id});
+  res.cookie("uid"," ",{maxAge:1})
+  return res.json({delete:"Account succeefully deleted"});
+
+}
+
+
 module.exports={
     handelUserSignup,
     handelUserLogin,
@@ -139,5 +150,6 @@ module.exports={
     handelGetAdminLogin,
     handelValidatePasskey,
     handelChooseAdminOption,
-    handelAdminViewId
+    handelAdminViewId,
+    handelUserDeleteAccount
 }

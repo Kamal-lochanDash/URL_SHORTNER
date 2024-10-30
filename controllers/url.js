@@ -33,7 +33,7 @@ async function handelRedirectURL(req,res) {
     const shortID=req.params.shortId;
     const entry=  await URL.findOneAndUpdate({shortID},{$push:{visitHistory:{timestamp:Date.now()}}})
 
-res.redirect(entry.redirectURL)
+res.redirect(entry?.redirectURL)
 };
 
 

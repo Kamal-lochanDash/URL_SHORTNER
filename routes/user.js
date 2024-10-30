@@ -1,5 +1,5 @@
 const express=require('express');
-const { handelUserSignup ,handelUserLogin, handelGetLogin,handelAdmin,handelGetAdminLogin,handelValidatePasskey, handelChooseAdminOption, handelAdminViewId} = require('../controllers/user');
+const { handelUserSignup ,handelUserLogin, handelGetLogin,handelAdmin,handelGetAdminLogin,handelValidatePasskey, handelChooseAdminOption, handelAdminViewId, handelUserDeleteAccount} = require('../controllers/user');
 const { restrictedTo} = require('../middlewares/auth');
 
 const router=express.Router();
@@ -14,6 +14,7 @@ router.get("/admin/login",restrictedTo(["NORMAL","ADMIN"]),handelGetAdminLogin)
 router.get("/admin",restrictedTo(["ADMIN"]),handelAdmin)
 router.get("/choose",handelChooseAdminOption)
 router.get("/admin/viewurl/:ID", restrictedTo(["ADMIN"]),handelAdminViewId);
+router.post("/delete-account",handelUserDeleteAccount)
 
 
 module.exports=router;
