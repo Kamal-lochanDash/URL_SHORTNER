@@ -74,7 +74,7 @@ async function handelValidatePasskey(req,res){
             // console.log(user);
             await User.findByIdAndUpdate(id,{role:"ADMIN"});
              const userA= await User.findOne({_id:id})
-             console.log(userA);
+            
              res.cookie("uid"," ",{maxAge:1})
              return res.render("login",{
                  message:"Plese login here to proceed further"
@@ -104,7 +104,7 @@ async function handelValidatePasskey(req,res){
 
 
 async function handelChooseAdminOption(req,res) {
-    console.log(req?.user?.role,"Nigga")
+   
     if(req?.user?.role=="NORMAL"){
         return res.redirect("/home")
     }else{
@@ -117,14 +117,14 @@ async function handelChooseAdminOption(req,res) {
 async function handelAdminViewId(req,res) {
    
     const ID=req?.params?.ID;
-    console.log(ID);
+    
 
     const allURLS= await URL.find({createdBy:ID});
-    console.log(allURLS)
+   
 
     const user= await User.find({_id:ID})
     const name=user[0].name;
-console.log(name)
+
     return res.render("viewurls",{
         allURLS:allURLS,
         name:name
