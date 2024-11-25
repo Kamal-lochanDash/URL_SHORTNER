@@ -142,6 +142,17 @@ async function  handelUserDeleteAccount(req,res) {
 }
 
 
+async function handelDeleteUserByAdmin(req,res) {
+   
+    const id=req?.params?.ID;
+    await User.findByIdAndDelete(id);
+  await URL.deleteMany({createdBy:id});
+  const message =encodeURIComponent("succesfullyDeleted");
+      return res.redirect(`/user/admin?message=${message}`);
+}
+
+
+
 module.exports={
     handelUserSignup,
     handelUserLogin,
@@ -151,5 +162,6 @@ module.exports={
     handelValidatePasskey,
     handelChooseAdminOption,
     handelAdminViewId,
-    handelUserDeleteAccount
+    handelUserDeleteAccount,
+    handelDeleteUserByAdmin
 }
