@@ -21,6 +21,11 @@
       background-color: #1a1a1a;
     }
 
+     /* New wrapper to add margin */
+     .page-wrapper {
+      margin: 0 15px; /* Added margin to the sides */
+      width: 100%;
+    }
     .container {
       text-align: center;
       color: #fff;
@@ -160,45 +165,64 @@
       animation-delay: 3s;
     }
 
-
     .dot:nth-child(7) {
-  width: 60px;
-  height: 60px;
-  top: 45%;  /* Adding new dot */
-  left: 40%;  /* Adjusting position */
-  animation-duration: 11s;
-  animation-delay: 1.5s;
-}
+      width: 60px;
+      height: 60px;
+      top: 45%; /* Adding new dot */
+      left: 40%; /* Adjusting position */
+      animation-duration: 11s;
+      animation-delay: 1.5s;
+    }
 
+    /* Deletion message */
+    .toast-message {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #28a745;
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(-10px);
+    }
 
-/*Deletion message*/
-.toast-message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #28a745;
-    color: #fff;
-    padding: 15px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(-10px);
-}
+    .toast-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.toast-message.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+    /* Media Query for Mobile Screens */
+    @media (max-width: 768px) {
+      /* Adjust header button size */
+      .header button {
+        padding: 8px 15px; /* Smaller padding */
+        font-size: 0.9rem; /* Smaller font */
+      }
 
+      /* Adjust title font size */
+      h1 {
+        font-size: 3rem; /* Smaller font size for h1 */
+        letter-spacing: 3px; /* Reduce letter spacing */
+      }
 
+      /* Adjust subtitle font size */
+      .subtitle {
+        font-size: 1rem; /* Smaller font size for subtitle */
+      }
 
-
+      /* Adjust dot sizes and positions */
+      .dot:nth-child(2), .dot:nth-child(3), .dot:nth-child(4), .dot:nth-child(5), .dot:nth-child(6), .dot:nth-child(7) {
+        width: 30px;
+        height: 30px; /* Smaller dots */
+      }
+    }
   </style>
 </head>
 <body>
-
   <!-- Header with Login Button -->
   <div class="header">
     <button onclick="window.location.href='/user/login'">Login / SignUp</button>
@@ -216,12 +240,6 @@
   <div class="dot"></div>
   <div class="dot"></div>
   <div class="dot"></div>
-
-
-
-
-
-
 
   <script>
     // Function to show a toast message
@@ -247,8 +265,6 @@
             localStorage.removeItem("deleteMessage"); // Clear the message
         }
     });
-</script>
-
-
+  </script>
 </body>
 </html>
