@@ -26,7 +26,7 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+            background: radial-gradient(circle, #8cb5f3 0%, #d6aefd 100%);
             overflow: hidden;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -74,14 +74,14 @@
 
         button {
             padding: 15px 25px;
-           background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+           background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             font-size: 1.5rem;
             font-weight: bold;
-            transition: background 0.3s ease;
+          
             width: 100%;
         }
 
@@ -278,6 +278,116 @@
     opacity: 1;
 }
 
+
+ /* Responsive Styles */
+ @media (max-width: 768px) {
+            /* Adjust body padding for smaller screens */
+            body {
+                padding: 10px;
+            }
+
+            /* Reduce the heading font size for mobile */
+            h1 {
+                font-size: 2.5rem; /* Changed from 4rem */
+            }
+
+            /* Adjust form width for smaller screens */
+            form {
+                padding: 20px; /* Reduced padding */
+                max-width: 90%; /* Changed from 600px */
+            }
+
+            /* Adjust input fields for smaller screens */
+            input[type="text"] {
+                padding: 10px; /* Reduced padding */
+                font-size: 1rem; /* Reduced font size */
+            }
+
+            /* Adjust button size for mobile screens */
+            button {
+                padding: 10px 20px; /* Reduced padding */
+                font-size: 1.2rem; /* Reduced font size */
+            }
+
+            /* Adjust table layout for smaller screens */
+            table {
+                font-size: 0.8rem; /* Reduced font size */
+                overflow-x: auto; /* Enable horizontal scrolling */
+            }
+
+            thead th {
+                font-size: 0.9rem; /* Reduced font size */
+            }
+
+            tbody td {
+                font-size: 0.8rem; /* Reduced font size */
+                padding: 8px; /* Reduced padding */
+            }
+
+            /* Adjust dropdown position for mobile */
+            .dropdown {
+                width: 50px; /* Reduced width */
+                height: 40px; /* Reduced height */
+                top: 10px; /* Adjusted position */
+                right: 10px; /* Adjusted position */
+            }
+
+            /* Adjust modal styles for smaller screens */
+            #deleteModal .modal-dialog {
+                max-width: 90%; /* Adjust modal width */
+            }
+
+            #deleteModal .modal-body {
+                padding: 20px; /* Reduced padding */
+            }
+
+            #deleteModal .btn {
+                padding: 10px; /* Reduced padding */
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Further adjustments for very small screens */
+            h1 {
+                font-size: 2rem; /* Further reduced font size */
+            }
+
+            input[type="text"] {
+                font-size: 0.9rem; /* Further reduced font size */
+            }
+
+            button {
+                font-size: 1rem; /* Further reduced font size */
+            }
+
+            table {
+                font-size: 0.7rem; /* Further reduced font size */
+            }
+
+            .dropdown {
+                width: 40px; /* Further reduced width */
+                height: 35px; /* Further reduced height */
+            }
+        }
+
+        @media (max-width: 768px) {
+        table {
+            display: none;
+        }
+    }
+
+    #mobile-message {
+    display: none;  /* Default: hidden */
+}
+
+@media (max-width: 768px) {
+    table {
+        display: none;  /* Hide the table */
+    }
+    #mobile-message {
+        display: block;  /* Show the message on mobile */
+    }
+}
        
     </style>
 </head>
@@ -351,9 +461,6 @@
 
 
 
-
-
-   
     <h1>URL-Shortener</h1>
 
     <% if (locals.NoUrl) { %>
@@ -400,6 +507,8 @@
     </table>
     <% } %>
 
+    <p id="mobile-message" style=" text-align: center; color: white;">Table is not available on mobile devices.<a href="/rand/randi ">view Urls</a></p>
+
     <!-- Adding the bubbles to the body -->
     <div class="bubble"></div>
     <div class="bubble"></div>
@@ -407,33 +516,6 @@
     <div class="bubble"></div>
     <div class="bubble"></div>
     <div class="bubble"></div>
-
-
-
-
-    <!-- <script>
-        function deleteAccount() {
-            fetch('/user/delete-account', {
-                method: 'POST'
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Optional: Redirect or display a success message
-                   
-                   window.location.href = '/'; // Redirect after deletion
-                   let data=response.json();
-                   data.then(res=>{
-                    console.log(res.delete)
-                   })
-                    
-                } else {
-                    alert('Failed to delete account');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        }
-    </script> -->
-
 
     <script>
         function deleteAccount() {
@@ -451,18 +533,7 @@
     })
     .catch(error => console.error('Error:', error));
 }
-
-
-
-
     </script>
-    
-    
-
-
-
-
-   
 </body>
 
 </html>
