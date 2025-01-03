@@ -112,9 +112,35 @@
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     }
 
-    .invalid{
+    .invalid {
       color: red;
       text-align: center;
+    }
+
+    /* Responsive styles for mobile screens */
+    @media (max-width: 480px) {
+      /* Reduce login container width for small screens */
+      .login-container {
+        width: 90%; /* Adjusted width for mobile */
+        padding: 20px; /* Adjusted padding for better fit */
+      }
+
+      h2 {
+        font-size: 1.5rem; /* Adjusted font size for mobile */
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        font-size: 1rem; /* Adjusted input font size for better readability */
+      }
+
+      input[type="submit"] {
+        font-size: 1rem; /* Adjusted button font size */
+      }
+
+      .signup-link {
+        font-size: 0.9rem; /* Adjusted font size for the signup link */
+      }
     }
   </style>
 </head>
@@ -123,29 +149,20 @@
   <div class="login-container">
     <h2>Login</h2>
     <form action="/user/login" method="post">
-
-
-
       <% if (locals.message) { %>
         <div class="invalid"><%= message %></div>
-     <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <% }else{ %>
-
-
-      <% if (locals.error) { %>
-        <div class="invalid"><%= error %></div>
-        <input type="email" name="email" placeholder="Email" required>
-         <input type="password" name="password" placeholder="Password" required>
-      <% } else { %>
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
+      <% } else { %>
+        <% if (locals.error) { %>
+          <div class="invalid"><%= error %></div>
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="password" name="password" placeholder="Password" required>
+        <% } else { %>
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="password" name="password" placeholder="Password" required>
         <% } %>
-
-        <% } %>
-
-
-       
+      <% } %>
       <input type="submit" value="Login">
     </form>
     <div class="signup-link">
