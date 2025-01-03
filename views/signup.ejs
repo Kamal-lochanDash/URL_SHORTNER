@@ -115,6 +115,33 @@
     .signup-container:hover {
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     }
+
+    /* Responsive styles for mobile screens */
+    @media (max-width: 480px) {
+      /* Adjusted signup container width for small screens */
+      .signup-container {
+        width: 90%; /* Adjusted width for better fit */
+        padding: 20px; /* Reduced padding for mobile */
+      }
+
+      h2 {
+        font-size: 1.5rem; /* Adjusted heading size */
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        font-size: 1rem; /* Adjusted input font size */
+      }
+
+      input[type="submit"] {
+        font-size: 1rem; /* Adjusted submit button font size */
+      }
+
+      .login-link {
+        font-size: 0.9rem; /* Adjusted font size for login links */
+      }
+    }
   </style>
 </head>
 
