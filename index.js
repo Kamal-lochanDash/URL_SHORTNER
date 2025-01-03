@@ -6,10 +6,11 @@ const staticRouter=require("./routes/staticRouter")
 const userRouter=require("./routes/user")
 const app= express();
 const port=8001;
+require('dotenv').config();
 const cookieParser= require("cookie-parser");
 const{restrictToLoggedinUserOnly,checkAuth,restrictedTo}=require("./middlewares/auth")
 
-connectToMongoDB("mongodb://127.0.0.1:27017/short-url")
+connectToMongoDB(process.env.MONGODB_URL)
 
 
 app.set("view engine","ejs")
