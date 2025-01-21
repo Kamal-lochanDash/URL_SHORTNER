@@ -51,7 +51,7 @@ async function handelGetLogin(req,res) {
 
 
 async function handelAdmin(req,res,) {
-   const allUser= await User.find({});
+   const allUser= await User.find({role:"NORMAL"});
    return res.render("dashboard",{
     allUser:allUser
    });
