@@ -61,9 +61,9 @@ async function handelAdmin(req,res,) {
 async function handelValidatePasskey(req,res){
     
     const passKey="Kamaldash2004#"
-    const body=req.body;
+    const body=req?.body;
     //console.log(req.user?.role,"Rand")
-    const id=req.user?.id;
+    const id=req?.user?.id;
     //console.log(id)
     if(req?.user?.role=="NORMAL"){
 

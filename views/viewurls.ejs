@@ -12,7 +12,7 @@
             color: #333;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow: auto;
             position: relative;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -30,7 +30,7 @@
             z-index: 1;
         }
 
-        /* Table Styles */
+        /* Desktop Table Styles */
         table {
             width: 90%;
             margin: 50px auto;
@@ -72,6 +72,69 @@
             color: #7F53AC;
         }
 
+        /* Mobile Table Styles */
+        .mobile-table {
+            display: none;
+        }
+
+        .mobile-table .mobile-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            padding: 15px;
+            color: #262626;
+            font-size: 1rem;
+            overflow: hidden;
+        }
+
+        .mobile-table .mobile-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #4E54C8;
+        }
+
+        .mobile-table .mobile-card p {
+            margin: 5px 0;
+            word-break: break-word;
+        }
+
+        .mobile-table .mobile-card a {
+            color: #4E54C8;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-table .mobile-card a:hover {
+            color: #7F53AC;
+        }
+
+        /* Media Queries */
+        @media only screen and (max-width: 768px) {
+
+            body {
+                overflow-x: hidden; /* Allow vertical scrolling while preventing horizontal scrolling */
+            }
+            table {
+                display: none; /* Hide desktop table on mobile */
+            }
+
+            .mobile-table {
+                display: block; /* Show mobile table on mobile */
+            }
+
+            .bubble {
+                display: none; /* Hide bubbles on mobile */
+            }
+        }
+
+        @media only screen and (min-width: 769px) {
+            .mobile-table {
+                display: none; /* Hide mobile table on desktop */
+            }
+        }
+
         /* Bubble Animation */
         .bubble {
             position: absolute;
@@ -94,13 +157,12 @@
                 opacity: 0;
             }
         }
-
-        /* JavaScript will control the size and position of the bubbles */
     </style>
 </head>
 <body>
     <h1>Urls created by <%= name %></h1>
 
+    <!-- Desktop Table -->
     <table>
         <thead>
             <tr>
@@ -123,6 +185,19 @@
             <% }) %>
         </tbody>
     </table>
+
+    <!-- Mobile Table -->
+    <div class="mobile-table">
+        <% allURLS.forEach((url, index) => { %>
+        <div class="mobile-card">
+            <h3>URL #<%= index + 1 %></h3>
+            <p><strong>Short ID:</strong> <%= url.shortID %></p>
+            <p><strong>Redirect:</strong> <%= url.redirectURL %></p>
+            <p><strong>Clicks:</strong> <%= url.visitHistory?.length %></p>
+            <p><strong>Short URL:</strong> <a href="http://localhost:8001/url/<%= url.shortID %>" target="_blank">http://localhost:8001/url/<%= url.shortID %></a></p>
+        </div>
+        <% }) %>
+    </div>
 
     <!-- Random Bubbles Floating -->
     <script>
